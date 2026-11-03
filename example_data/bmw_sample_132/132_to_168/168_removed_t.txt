@@ -1,0 +1,2 @@
+# Translation for frame 1: 168_removed
+-2.05173659 -0.73214620 0.24573167

@@ -1,0 +1,2 @@
+# Translation for frame 4: 180_removed
+-2.59741807 -0.83292532 0.32352388

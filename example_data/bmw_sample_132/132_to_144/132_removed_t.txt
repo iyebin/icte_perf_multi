@@ -1,0 +1,2 @@
+# Translation for frame 0: 132_removed
+-0.00123491 -0.31094909 -0.16944259

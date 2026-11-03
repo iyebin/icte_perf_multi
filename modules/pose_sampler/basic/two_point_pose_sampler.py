@@ -1,0 +1,31 @@
+from .pose_sampler import PoseSampler
+
+import torch
+import torch.nn.functional as F
+import numpy as np
+
+from utils.camera_utils import *
+from scipy.ndimage import minimum_filter1d, gaussian_filter1d
+
+
+class TwoPointPoseSampler(PoseSampler):
+
+    def __init__(self, base_point=[0., 0., 0.], z_offset=0.15):
+        super().__init__()
+        base_point = torch.as_tensor(base_point, dtype=torch.float32)
+        z_offset = float(z_offset)
+
+        self.anchor_pts = torch.stack([
+            base_point,
+            base_point + torch.tensor([0., 0., z_offset], dtype=base_point.dtype)
+        ])
+
+        self.n_poses = 2
+        self.n_anchors = 2  # core_exp_runner 호환
+
+    @torch.no_grad()
+    def sample_pose(self, idx):
+        pose = torch.eye(4)
+        pose[:3, 3] = self.anchor_pts[idx]
+        return pose
+
